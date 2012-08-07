@@ -63,6 +63,38 @@ void list_append(void *data)
 	   
 }  /* End of list_append  */  
 
+	
+	
+/* Free the list memory. */ 
+void free_list(void) 
+{ 
+  /* We create TWO pointers. */ 
+  /* ptr is used to iterate through the list. */ 
+  /* tmp (which points to the same place) is used to */ 
+  /* actually free the memory. */    
+   struct node *ptr, *tmp = NULL;  	  
+  		
+  /* Check that the list is non-null. */   
+   if(mylist != NULL) 
+     {  
+		          		
+	     for( ptr = mylist; ptr->next != NULL; ptr = ptr->next ) 
+	       { 
+			 /* Iterate through the list */   
+			  printf( "Freeing %s\n",  (char *) (ptr->data) );  
+			  tmp = ptr; 			 
+		      free(tmp); 			      
+	       } 	    
+	  
+	   /* Free the last element of the list */ 
+	   /* (where ptr->next IS null). */ 	   
+	    printf( "Freeing %s\n",  (char *) (ptr->data) ); 
+	    free(ptr);   
+	
+	 }     
+	
+} 	
+		
 	    
 	    
 
@@ -88,7 +120,6 @@ void print_list(void)
 int main() 
 { 
 
-
 list_append("foo");  
 list_append("bar");  
 list_append("baz");   
@@ -97,6 +128,8 @@ list_append("two");
 list_append("three");   
 
 print_list(); 
+
+free_list();  
 
 return 0;  
  
